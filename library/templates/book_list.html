@@ -1,30 +1,62 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Book List
+    Book Overview
 {% endblock %}
 
 {% block main %}
-    {% for book in books %}
-        <p class="my-2">{{ book.title }}</p>
-    {% endfor %}
+    <div class="flex flex-col items-center">
+        <h1 class="text-2xl my-2 font-bold">Book Overview</h1>
+        <div class="overflow-x-auto overflow-y-auto w-full">
+            <table class="table w-full">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ISBN</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Author</th>
+                    <th>Genres</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.id }}</td>
+                        <td>{{ book.isbn }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.year }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>
+                            {% for genre in book.genres.all %}
+                                <div class="badge badge-neutral"><span class="font-bold">{{ genre.name.upper }}</span>
+                                </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-            {% endif %}
 
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
+        <div class="m-auto my-5">
+            <div class="join">
+                {% if page_obj.has_previous %}
+                    <a class="join-item btn" href="?page=1">&laquo;</a>
+                    <a class="join-item btn" href="?page={{ page_obj.previous_page_number }}">‹</a>
+                {% endif %}
 
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
+                <a class="join-item btn">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </a>
+
+                {% if page_obj.has_next %}
+                    <a class="join-item btn" href="?page={{ page_obj.next_page_number }}">›</a>
+                    <a class="join-item btn" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 {% endblock %}
 ```
