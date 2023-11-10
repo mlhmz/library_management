@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 from library.validators import validate_isbn
@@ -29,3 +30,10 @@ class Book(models.Model):
 
     def __str__(self):
         return f'{self.title} ({self.year})'
+
+
+class BorrowEntry(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    borrowedFrom = models.DateField()
+    borrowedTo = models.DateField()

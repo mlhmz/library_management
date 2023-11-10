@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Book, Genre, Author
+from .models import Book, Genre, Author, BorrowEntry
 
 
 # Register your models here.
@@ -19,3 +19,8 @@ class GenreAdmin(admin.ModelAdmin):
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
     model = Author
+
+
+@admin.register(BorrowEntry)
+class BorrowEntryAdmin(admin.ModelAdmin):
+    model = BorrowEntry
