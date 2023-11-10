@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block main %}
-    <div class="flex flex-col items-center w-1/2 h-screen">
-        <h1 class="text-2xl">{{ book.title }}</h1>
+    <div class="flex flex-col items-center w-1/2 h-screen m-auto gap-3">
+        <h1 class="text-2xl text-center">{{ book.title }}</h1>
         <p class="font-bold font-base-100 text-sm">{{ book.author|upper }}</p>
+        <button class="btn btn-secondary">Borrow</button>
     </div>
 {% endblock %}

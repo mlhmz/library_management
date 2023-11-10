@@ -12,8 +12,19 @@
 </head>
 <body>
 <main>
-    <div class="navbar bg-neutral text-neutral-content mb-5">
-        <a class="btn btn-ghost normal-case text-xl" href="/">Library Management</a>
+    <div class="navbar bg-neutral text-neutral-content mb-5 flex justify-between">
+        <div>
+            <a class="btn btn-ghost normal-case text-xl" href="/">Library Management</a>
+        </div>
+        {% if user.is_authenticated %}
+            <div>
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+        {% else %}
+            <div>
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+        {% endif %}
     </div>
     <div class="container m-auto">
         {% block main %}
