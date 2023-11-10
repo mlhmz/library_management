@@ -4,18 +4,18 @@ from .models import Book, Genre, Author
 
 
 # Register your models here.
+@admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     model = Book
 
+    filter_horizontal = ('genres',)
 
+
+@admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
     model = Genre
 
 
+@admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
     model = Author
-
-
-admin.site.register(Book, BookAdmin)
-admin.site.register(Genre, GenreAdmin)
-admin.site.register(Author, AuthorAdmin)
