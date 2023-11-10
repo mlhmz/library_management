@@ -1,5 +1,7 @@
 from django.db import models
 
+from library.validators import validate_isbn
+
 
 class Genre(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -19,7 +21,7 @@ class Author(models.Model):
 
 class Book(models.Model):
     id = models.BigAutoField(primary_key=True)
-    isbn = models.CharField(max_length=13)
+    isbn = models.CharField(max_length=13, validators=[validate_isbn])
     title = models.CharField(max_length=255)
     year = models.IntegerField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
