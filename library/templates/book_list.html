@@ -26,72 +26,31 @@
             </button>
         </div>
         <p id="search_error" class="text-red-600 my-2"></p>
-    
+
         <div class="overflow-x-auto overflow-y-auto w-full">
             <table class="table w-full">
                 <thead>
                 <tr>
-                    <th>
-                        <div class="flex flex-row items-center gap-2 cursor-pointer" onclick="orderBy('id')">
-                            <a class="cursor-pointer" onclick="orderBy('id')">ID</a>
-                            {% if order_by == 'id' %}
-                                {% if asc == 'true' %}
-                                    <span class="material-symbols-outlined">expand_less</span>
-                                {% else %}
-                                    <span class="material-symbols-outlined">expand_more</span>
+                    {% for field in fields %}
+                        <th>
+                            <div class="flex flex-row items-center gap-2 cursor-pointer"
+                                 onclick="orderBy('{{ field }}')">
+                                <a>{{ field|upper }}</a>
+                                {% if order_by == field %}
+                                    {% if asc == 'true' %}
+                                        <span class="material-symbols-outlined">expand_less</span>
+                                    {% else %}
+                                        <span class="material-symbols-outlined">expand_more</span>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
-                        </div>
-                    </th>
+                            </div>
+                        </th>
+                    {% endfor %}
                     <th>
-                        <div class="flex flex-row items-center gap-2 cursor-pointer">
-                            <a class="cursor-pointer" onclick="orderBy('isbn')">ISBN</a>
-                            {% if order_by == 'isbn' %}
-                                {% if asc == 'true' %}
-                                    <span class="material-symbols-outlined">expand_less</span>
-                                {% else %}
-                                    <span class="material-symbols-outlined">expand_more</span>
-                                {% endif %}
-                            {% endif %}
-                        </div>
+                        <a>
+                            {{ 'genres'|upper }}
+                        </a>
                     </th>
-                    <th>
-                        <div class="flex flex-row items-center gap-2 cursor-pointer" onclick="orderBy('title')">
-                            <a class="cursor-pointer" onclick="orderBy('title')">Title</a>
-                            {% if order_by == 'title' %}
-                                {% if asc == 'true' %}
-                                    <span class="material-symbols-outlined">expand_less</span>
-                                {% else %}
-                                    <span class="material-symbols-outlined">expand_more</span>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    </th>
-                    <th>
-                        <div class="flex flex-row items-center gap-2 cursor-pointer" onclick="orderBy('year')">
-                            <a class="cursor-pointer" onclick="orderBy('year')">Year</a>
-                            {% if order_by == 'year' %}
-                                {% if asc == 'true' %}
-                                    <span class="material-symbols-outlined">expand_less</span>
-                                {% else %}
-                                    <span class="material-symbols-outlined">expand_more</span>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    </th>
-                    <th>
-                        <div class="flex flex-row items-center gap-2 cursor-pointer" onclick="orderBy('author')">
-                            <a class="cursor-pointer" onclick="orderBy('author')">Author</a>
-                            {% if order_by == 'author' %}
-                                {% if asc == 'true' %}
-                                    <span class="material-symbols-outlined">expand_less</span>
-                                {% else %}
-                                    <span class="material-symbols-outlined">expand_more</span>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    </th>
-                    <th>Genres</th>
                 </tr>
                 </thead>
                 <tbody>

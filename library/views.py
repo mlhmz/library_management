@@ -64,6 +64,7 @@ class BookListView(ListView):
         context['query_isbn'] = self.request.GET.get('isbn')
         context['query_genre'] = self.request.GET.get('genre')
         context['query_year'] = self.request.GET.get('year')
+        context['fields'] = ['id', 'isbn', 'title', 'year', 'author']
         return context
 
 
