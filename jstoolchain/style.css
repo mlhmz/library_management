@@ -7,3 +7,24 @@
 * {
     font-family: "Inter", "Segoe UI", "Helvetica Neue", "sans-serif";
 }
+
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+        width: 12px;
+        height: 20px;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        border-radius: 0 5vh 5vh 0;
+        background: theme('colors.neutral-focus')
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        background: theme('colors.neutral');
+        border-radius: 0 5vh 5vh 0;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background: theme('colors.neutral');
+    }
+}
