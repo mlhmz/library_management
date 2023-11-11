@@ -93,6 +93,7 @@ class DeleteBorrowedEntryView(DeleteView):
             if entry.customer.id is not request.user.id:
                 messages.error(request, 'You are not allowed to delete this entry')
                 return super().get(request, *args, **kwargs)
+            messages.success(request, 'Entry deleted successfully')
             return super().post(request, *args, **kwargs)
 
 
