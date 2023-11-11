@@ -21,6 +21,10 @@ class BookBorrowView(CreateView):
     template_name = 'book_borrow.html'
     success_url = reverse_lazy('book_list')
 
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return super().post(request, *args, **kwargs)
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['book_pk'] = self.kwargs['book_pk']

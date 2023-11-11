@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends "auth_view.html" %}
 
 {% block title %}
     Borrow a Book
 {% endblock %}
 
-{% block main %}
+{% block protected %}
     <form class="flex flex-col items-center m-auto" method="post">
         {% csrf_token %}
         <div class="flex flex-col items-center gap-16 md:w-1/2 lg:w-1/3 m-auto mx-5">
