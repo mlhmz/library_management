@@ -7,7 +7,7 @@
 {% block main %}
     <div class="flex flex-col items-center">
         <div class="text-2xl my-2 font-bold">
-            Books
+            Your Borrowed Books
         </div>
         <div class="overflow-x-auto overflow-y-auto w-full">
             <table class="table w-full">
@@ -28,9 +28,9 @@
                         <td>{{ entry.borrowed_from }}</td>
                         <td>{{ entry.borrowed_to }}</td>
                         <td>
-                            <a class="btn btn-sm btn-neutral hover:btn-neutral-focus">
-                                    <span class="material-symbols-outlined text-red-600 cursor-pointer"
-                                          onclick="console.log('test')">delete</span>
+                            <a class="btn btn-sm btn-neutral hover:btn-neutral-focus"
+                               href="{% url 'delete_borrowed_entry' entry.id %}">
+                                <span class="material-symbols-outlined text-red-600 cursor-pointer">delete</span>
                             </a>
                             <a class="btn btn-sm" href="{% url 'book_borrow' entry.book_id %}">
                                 <span class="material-symbols-outlined cursor-pointer">arrow_forward</span>

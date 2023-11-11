@@ -69,7 +69,7 @@ class BookListView(ListView):
 
 
 class BorrowedBooksListView(ListView):
-    paginate_by = 10
+    paginate_by = 5
     model = BorrowEntry
     template_name = 'borrowed_books.html'
     context_object_name = "borrowed_books"
@@ -81,6 +81,19 @@ class BorrowedBooksListView(ListView):
 
 class DeleteBorrowedEntryView(DeleteView):
     model = BorrowEntry
+    template_name = 'delete_borrowed_entry.html'
+    context_object_name = "entry"
+    success_url = reverse_lazy('borrowed_books')
+
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            # check if user is owner of entry
+            entry = get_object_or_404(BorrowEntry, pk=self.kwargs['pk'])
+
+            if entry.customer.id is not request.user.id:
+                messages.error(request, 'You are not allowed to delete this entry')
+                return super().get(request, *args, **kwargs)
+            return super().post(request, *args, **kwargs)
 
 
 class BookBorrowView(CreateView):

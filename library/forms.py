@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import DateInput
+from django.utils.datetime_safe import datetime
 
 from .models import BorrowEntry
 
@@ -22,6 +23,10 @@ def is_book_in_timespan(borrowed_from, borrowed_to, timespan):
     return delta.days > timespan
 
 
+def is_borrow_in_past(borrowed_from):
+    return borrowed_from < datetime.now().date()
+
+
 class BorrowEntryForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.book_pk = kwargs.pop('book_pk')
@@ -41,6 +46,9 @@ class BorrowEntryForm(forms.ModelForm):
 
         if is_book_available_in_timespan(self.book_pk, borrowed_from, borrowed_to):
             raise ValidationError("The book is not available in the given timespan.")
+
+        if is_borrow_in_past(borrowed_from):
+            raise ValidationError("The borrow date can't be in the past.")
 
     class Meta:
         model = BorrowEntry
