@@ -39,4 +39,4 @@ class BorrowEntry(models.Model):
     borrowed_to = models.DateField()
 
     def __str__(self):
-        return f'{self.borrowed_from} to {self.borrowed_to}'
+        return f'{self.borrowed_from} - {self.borrowed_to}'
