@@ -1,30 +1,30 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import DateInput, ModelMultipleChoiceField, ModelChoiceField
+from django.forms import DateInput
 
-from .models import BorrowEntry, Book
+from .models import BorrowEntry
 
 
 class BorrowEntryForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
 
-        borrowed_from = cleaned_data.get("borrowedFrom")
-        borrowed_to = cleaned_data.get("borrowedTo")
+        borrowed_from = cleaned_data.get("borrowed_from")
+        borrowed_to = cleaned_data.get("borrowed_to")
 
         if borrowed_from > borrowed_to:
             raise ValidationError("The From Date shouldn't be after the To Date")
 
     class Meta:
         model = BorrowEntry
-        fields = ["borrowedFrom", "borrowedTo"]
+        fields = ["borrowed_from", "borrowed_to"]
         widgets = {
-            'borrowedFrom': DateInput(attrs={
+            'borrowed_from': DateInput(attrs={
                 'class': 'input input-bordered',
                 'placeholder': 'From',
                 'type': 'date'
             }),
-            'borrowedTo': DateInput(attrs={
+            'borrowed_to': DateInput(attrs={
                 'class': 'input input-bordered',
                 'placeholder': 'To',
                 'type': 'date'

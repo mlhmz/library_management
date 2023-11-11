@@ -35,5 +35,5 @@ class Book(models.Model):
 class BorrowEntry(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    borrowedFrom = models.DateField()
-    borrowedTo = models.DateField()
+    borrowed_from = models.DateField()
+    borrowed_to = models.DateField()
