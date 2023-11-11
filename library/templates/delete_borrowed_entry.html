@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block protected %}
-    {% if user.id is entry.book_id %}
+    {% if user.id is entry.customer.id %}
         <div class="flex flex-col items-center gap-3">
             <h1 class="text-xl font-bold">Are you sure you want cancel the following borrow entry?</h1>
             <div class="flex flex-col items-center gap-3 my-5">
