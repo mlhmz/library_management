@@ -9,6 +9,24 @@
         <div class="text-2xl my-2 font-bold">
             Books
         </div>
+        <div class="flex flex-row gap-3 items-center">
+            <!-- Search -->
+            <select class="input input-bordered" id="category">
+                <option disabled selected value="none">Pick category</option>
+                <option value="id">ID</option>
+                <option value="isbn">ISBN</option>
+                <option value="title">Title</option>
+                <option value="year">Year</option>
+                <option value="author">Author</option>
+                <option value="genres">Genres (comma seperated)</option>
+            </select>
+            <input type="text" placeholder="Search…" id="search" class="input input-bordered"/>
+            <button class="btn btn-square" onclick="search()">
+                <span class="material-symbols-outlined">search</span>
+            </button>
+        </div>
+        <p id="search_error" class="text-red-600 my-2"></p>
+    
         <div class="overflow-x-auto overflow-y-auto w-full">
             <table class="table w-full">
                 <thead>
@@ -138,6 +156,28 @@
             url.searchParams.set("order_by", input);
             window.location.href = url;
         }
+
+        function search() {
+            let url = new URL(window.location.href);
+            let category = document.getElementById("category").value;
+
+            if (category === "none") {
+                document.getElementById("search_error").innerHTML = "Please select a category";
+                return;
+            }
+
+            let search = document.getElementById("search").value;
+            url.searchParams.set(category, search);
+            window.location.href = url;
+        }
+
+        var input = document.getElementById("search");
+        input.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                search();
+            }
+        });
     </script>
 {% endblock %}
 ```

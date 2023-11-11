@@ -34,9 +34,9 @@ class BookListView(ListView):
         if isbn is not None:
             all_books = all_books.filter(isbn__icontains=isbn)
 
-        genre = self.request.GET.get('genre')
-        if genre is not None:
-            genres = genre.split(',')
+        genres_str = self.request.GET.get('genres')
+        if genres_str is not None:
+            genres = genres_str.split(',')
             for genre in genres:
                 all_books = all_books.filter(genres__name__icontains=genre)
 
