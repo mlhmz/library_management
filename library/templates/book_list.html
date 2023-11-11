@@ -46,6 +46,9 @@
                 {% if page_obj.has_previous %}
                     <a class="join-item btn" href="?page=1">&laquo;</a>
                     <a class="join-item btn" href="?page={{ page_obj.previous_page_number }}">‹</a>
+                {% else %}
+                    <a class="join-item btn" disabled="true" href="?page=1">&laquo;</a>
+                    <a class="join-item btn" disabled="true">‹</a>
                 {% endif %}
 
                 <a class="join-item btn">
@@ -55,6 +58,9 @@
                 {% if page_obj.has_next %}
                     <a class="join-item btn" href="?page={{ page_obj.next_page_number }}">›</a>
                     <a class="join-item btn" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+                {% else %}
+                    <a class="join-item btn" disabled="true">›</a>
+                    <a class="join-item btn" disabled="true">&raquo;</a>
                 {% endif %}
             </div>
         </div>
