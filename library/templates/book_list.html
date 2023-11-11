@@ -13,11 +13,66 @@
             <table class="table w-full">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>ISBN</th>
-                    <th>Title</th>
-                    <th>Year</th>
-                    <th>Author</th>
+                    <th>
+                        <div class="flex flex-row items-center gap-2 cursor-pointer" onclick="orderBy('id')">
+                            <a class="cursor-pointer" onclick="orderBy('id')">ID</a>
+                            {% if order_by == 'id' %}
+                                {% if asc == 'true' %}
+                                    <span class="material-symbols-outlined">expand_less</span>
+                                {% else %}
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex flex-row items-center gap-2 cursor-pointer">
+                            <a class="cursor-pointer" onclick="orderBy('isbn')">ISBN</a>
+                            {% if order_by == 'isbn' %}
+                                {% if asc == 'true' %}
+                                    <span class="material-symbols-outlined">expand_less</span>
+                                {% else %}
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex flex-row items-center gap-2 cursor-pointer" onclick="orderBy('title')">
+                            <a class="cursor-pointer" onclick="orderBy('title')">Title</a>
+                            {% if order_by == 'title' %}
+                                {% if asc == 'true' %}
+                                    <span class="material-symbols-outlined">expand_less</span>
+                                {% else %}
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex flex-row items-center gap-2 cursor-pointer" onclick="orderBy('year')">
+                            <a class="cursor-pointer" onclick="orderBy('year')">Year</a>
+                            {% if order_by == 'year' %}
+                                {% if asc == 'true' %}
+                                    <span class="material-symbols-outlined">expand_less</span>
+                                {% else %}
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex flex-row items-center gap-2 cursor-pointer" onclick="orderBy('author')">
+                            <a class="cursor-pointer" onclick="orderBy('author')">Author</a>
+                            {% if order_by == 'author' %}
+                                {% if asc == 'true' %}
+                                    <span class="material-symbols-outlined">expand_less</span>
+                                {% else %}
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </th>
                     <th>Genres</th>
                 </tr>
                 </thead>
@@ -67,5 +122,23 @@
             </div>
         </div>
     </div>
+    <script>
+        function orderBy(fieldName) {
+            let url = new URL(window.location.href);
+            let input = fieldName
+            let orderBy = url.searchParams.get("order_by");
+            let asc = url.searchParams.get("asc");
+            if (input === orderBy) {
+                if (asc === "true") {
+                    url.searchParams.set("asc", "false");
+                } else {
+                    url.searchParams.set("asc", "true");
+                }
+            }
+            url.searchParams.set("order_by", input);
+            window.location.href = url;
+        }
+    </script>
 {% endblock %}
 ```
+

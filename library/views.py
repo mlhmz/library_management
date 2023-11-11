@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 
 from .forms import BorrowEntryForm
 from .models import Book, BorrowEntry
@@ -15,7 +15,6 @@ class BookListView(ListView):
     context_object_name = "books"
 
     def get_queryset(self):
-        # print(self.request.content_params['deine_mama'])
         all_books = Book.objects.all()
 
         # filter id
@@ -45,8 +44,27 @@ class BookListView(ListView):
         if year is not None:
             all_books = all_books.filter(year__icontains=year)
 
-        all_books = all_books.order_by('-year')
+        order_by = self.request.GET.get('order_by')
+        ascending = self.request.GET.get('asc')
+        if order_by is not None:
+            if ascending == 'true':
+                all_books = all_books.order_by(f'{order_by}')
+            else:
+                all_books = all_books.order_by(f'-{order_by}')
+
         return all_books
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order_by'] = self.request.GET.get('order_by')
+        context['asc'] = self.request.GET.get('asc')
+        context['id'] = self.request.GET.get('id')
+        context['query_author'] = self.request.GET.get('author')
+        context['query_title'] = self.request.GET.get('title')
+        context['query_isbn'] = self.request.GET.get('isbn')
+        context['query_genre'] = self.request.GET.get('genre')
+        context['query_year'] = self.request.GET.get('year')
+        return context
 
 
 class BorrowedBooksListView(ListView):
@@ -58,6 +76,10 @@ class BorrowedBooksListView(ListView):
     def get_queryset(self):
         return BorrowEntry.objects.all().filter(customer=self.request.user).order_by('-borrowed_from').order_by(
             '-borrowed_from')
+
+
+class DeleteBorrowedEntryView(DeleteView):
+    model = BorrowEntry
 
 
 class BookBorrowView(CreateView):
