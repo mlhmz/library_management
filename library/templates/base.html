@@ -24,6 +24,7 @@
                 <details class="dropdown dropdown-end dropdown-hover cursor-pointer">
                     <summary>Hi {{ user.username }}!</summary>
                     <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box">
+                        <li><a href="{% url 'borrowed_books' %}">Borrowed Books</a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </details>

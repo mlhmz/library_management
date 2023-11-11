@@ -14,6 +14,51 @@ class BookListView(ListView):
     template_name = 'book_list.html'
     context_object_name = "books"
 
+    def get_queryset(self):
+        # print(self.request.content_params['deine_mama'])
+        all_books = Book.objects.all()
+
+        # filter id
+        query_id = self.request.GET.get('id')
+        if query_id is not None:
+            all_books = all_books.filter(id=query_id)
+
+        author = self.request.GET.get('author')
+        if author is not None:
+            all_books = all_books.filter(author__name__icontains=author)
+
+        title = self.request.GET.get('title')
+        if title is not None:
+            all_books = all_books.filter(title__icontains=title)
+
+        isbn = self.request.GET.get('isbn')
+        if isbn is not None:
+            all_books = all_books.filter(isbn__icontains=isbn)
+
+        genre = self.request.GET.get('genre')
+        if genre is not None:
+            genres = genre.split(',')
+            for genre in genres:
+                all_books = all_books.filter(genres__name__icontains=genre)
+
+        year = self.request.GET.get('year')
+        if year is not None:
+            all_books = all_books.filter(year__icontains=year)
+
+        all_books = all_books.order_by('-year')
+        return all_books
+
+
+class BorrowedBooksListView(ListView):
+    paginate_by = 10
+    model = BorrowEntry
+    template_name = 'borrowed_books.html'
+    context_object_name = "borrowed_books"
+
+    def get_queryset(self):
+        return BorrowEntry.objects.all().filter(customer=self.request.user).order_by('-borrowed_from').order_by(
+            '-borrowed_from')
+
 
 class BookBorrowView(CreateView):
     model = BorrowEntry
