@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
@@ -39,4 +40,5 @@ class BookBorrowView(CreateView):
         self.object.customer = self.request.user
         self.object.book = book
         self.object.save()
+        messages.success(self.request, 'Borrow Timespan booked successfully')
         return super().form_valid(form)

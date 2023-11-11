@@ -35,6 +35,23 @@
         {% block main %}
         {% endblock main %}
     </div>
+    <div id="message_container" class="fixed bottom-0 right-0 m-5 transition-all">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message|safe }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 </main>
 </body>
+
+<script>
+    var message_ele = document.getElementById("message_container");
+
+    setTimeout(function () {
+        message_ele.style.opacity = "0";
+    }, 5000);
+</script>
 </html>
