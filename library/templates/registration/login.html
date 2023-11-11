@@ -9,9 +9,11 @@
         <form method="post" action="{% url 'login' %}" class="flex flex-col items-center gap-3">
             {% csrf_token %}
             <h1 class="text-2xl font-bold">Login</h1>
+            <label for="id_username">Username</label>
             <input type="text" name="username" placeholder="Username" autofocus="" autocapitalize="none"
                    autocomplete="username" maxlength="150"
                    required="" id="id_username" class="input input-bordered">
+            <label for="id_password">Password</label>
             <input type="password" name="password" placeholder="Password" autocomplete="current-password" required=""
                    id="id_password"
                    class="input input-bordered">
@@ -20,7 +22,7 @@
             <input type="hidden" name="next" value="{{ next }}">
         </form>
         {% if form.errors %}
-            <p>Your username and password didn't match. Please try again.</p>
+            <p class="text-red-600">Your username and password didn't match. Please try again.</p>
         {% endif %}
     </div>
 {% endblock %}
