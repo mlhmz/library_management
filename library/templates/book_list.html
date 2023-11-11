@@ -9,9 +9,11 @@
         <div class="text-2xl my-2 font-bold">
             Books
         </div>
-        <div class="flex flex-row gap-3 items-center">
-            <!-- Search -->
-            <select class="input input-bordered" id="category">
+        <label for="search" class="hidden">Search</label>
+        <label for="category" class="hidden">Search</label>
+        <div class="join shadow-md">
+            <input type="text" placeholder="Search…" id="search" class="input input-bordered join-item"/>
+            <select class="input input-bordered join-item" id="category">
                 <option disabled selected value="none">Pick category</option>
                 <option value="id">ID</option>
                 <option value="isbn">ISBN</option>
@@ -20,8 +22,7 @@
                 <option value="author">Author</option>
                 <option value="genres">Genres (comma seperated)</option>
             </select>
-            <input type="text" placeholder="Search…" id="search" class="input input-bordered"/>
-            <button class="btn btn-square" onclick="search()">
+            <button class="btn btn-square join-item" onclick="search()" aria-label="Perform search">
                 <span class="material-symbols-outlined">search</span>
             </button>
         </div>
