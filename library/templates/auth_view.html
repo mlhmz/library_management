@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{% block title %}
+    {% if user.is_authenticated %}
+        {% block protected_title %}
+        {% endblock %}
+    {% else %}
+        Login required
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     {% if user.is_authenticated %}
         {% block protected %}

@@ -1,7 +1,7 @@
 {% extends "auth_view.html" %}
 
-{% block title %}
-    Borrow a Book
+{% block protected_title %}
+    {{ book.title }}
 {% endblock %}
 
 {% block protected %}

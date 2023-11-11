@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="{% static "css/output.css" %}">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <title>
+        LM -
         {% block title %}
         {% endblock title %}
     </title>
@@ -14,7 +16,8 @@
 <main>
     <div class="navbar bg-neutral text-neutral-content mb-5 flex justify-between">
         <div>
-            <a class="btn btn-ghost normal-case text-xl" href="/">Library Management</a>
+            <a class="btn btn-ghost normal-case text-xl" href="/"><span class="material-symbols-outlined">book</span>
+                Library Management</a>
         </div>
         {% if user.is_authenticated %}
             <div class="flex gap-1 mr-3">
