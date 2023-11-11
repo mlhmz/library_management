@@ -22,7 +22,7 @@
                 <tbody>
                 {% for book in books %}
                     <tr class="hover:bg-base-200 cursor-pointer"
-                        onclick="document.location = '{% url 'book_detail' book.pk %}'">
+                        onclick="document.location = '{% url 'book_borrow' book.pk %}'">
                         <td>{{ book.id }}</td>
                         <td>{{ book.isbn }}</td>
                         <td>{{ book.title }}</td>

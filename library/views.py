@@ -14,12 +14,6 @@ class BookListView(ListView):
     context_object_name = "books"
 
 
-class BookDetailView(DetailView):
-    model = Book
-    template_name = 'book_detail.html'
-    context_object_name = "book"
-
-
 class BookBorrowView(CreateView):
     model = BorrowEntry
     form_class = BorrowEntryForm
@@ -30,6 +24,12 @@ class BookBorrowView(CreateView):
         kwargs = super().get_form_kwargs()
         kwargs['book_pk'] = self.kwargs['book_pk']
         return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['book'] = get_object_or_404(Book, pk=self.kwargs['book_pk'])
+        context['borrow_entries'] = BorrowEntry.objects.all().filter(book__pk=self.kwargs['book_pk'])
+        return context
 
     def form_valid(self, form):
         book_pk = self.kwargs['book_pk']

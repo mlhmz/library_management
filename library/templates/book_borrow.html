@@ -8,6 +8,23 @@
     <form method="post">
         {% csrf_token %}
         <div class="flex flex-col items-center gap-3">
+            <div>
+                <h1 class="text-2xl text-center">{{ book.title }}</h1>
+                <p class="font-bold font-base-100 text-sm">{{ book.author|upper }}</p>
+                <p>{{ book.year }}</p>
+                <div class="flex gap-3 items-center">
+                    <p>ISBN:</p>
+                    <p class="font-mono bg-base-200 bg-opacity-30 p-1 rounded">{{ book.isbn }}</p>
+                </div>
+            </div>
+            <div id="borrow_entries">
+                {% for entry in borrow_entries %}
+                    <div>
+                        {{ entry }}
+                    </div>
+                    <div class="divider"></div>
+                {% endfor %}
+            </div>
             <div class="flex gap-3">
                 <div>
                     <label for="id_borrowed_from">From:</label>

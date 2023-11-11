@@ -18,7 +18,8 @@ def is_from_date_after_to_date(from_date, to_date):
 
 
 def is_book_in_timespan(borrowed_from, borrowed_to, timespan):
-    return borrowed_to - borrowed_from > timespan
+    delta = borrowed_to - borrowed_from
+    return delta.days > timespan
 
 
 class BorrowEntryForm(forms.ModelForm):
