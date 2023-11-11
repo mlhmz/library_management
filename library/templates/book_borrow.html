@@ -12,12 +12,17 @@
                 <div>
                     <label for="id_borrowed_from">From:</label>
                     {{ form.borrowed_from }}
+                    {{ form.borrowed_from.errors }}
                 </div>
                 <div>
                     <label for="id_borrowed_to">To:</label>
                     {{ form.borrowed_to }}
+                    {{ form.borrowed_to.errors }}
                 </div>
             </div>
+            {% for error in form.non_field_errors %}
+                <p class="text-red-600">{{ error }}</p>
+            {% endfor %}
             <button class="btn btn-secondary" type="submit">Borrow Book</button>
         </div>
     </form>

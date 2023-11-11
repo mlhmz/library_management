@@ -37,3 +37,6 @@ class BorrowEntry(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     borrowed_from = models.DateField()
     borrowed_to = models.DateField()
+
+    def __str__(self):
+        return f'{self.borrowed_from} to {self.borrowed_to}'

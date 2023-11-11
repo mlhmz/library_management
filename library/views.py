@@ -26,6 +26,11 @@ class BookBorrowView(CreateView):
     template_name = 'book_borrow.html'
     success_url = reverse_lazy('book_list')
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['book_pk'] = self.kwargs['book_pk']
+        return kwargs
+
     def form_valid(self, form):
         book_pk = self.kwargs['book_pk']
         book = get_object_or_404(Book, pk=book_pk)
