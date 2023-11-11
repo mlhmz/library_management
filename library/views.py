@@ -28,7 +28,8 @@ class BookBorrowView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['book'] = get_object_or_404(Book, pk=self.kwargs['book_pk'])
-        context['borrow_entries'] = BorrowEntry.objects.all().filter(book__pk=self.kwargs['book_pk'])
+        context['borrow_entries'] = BorrowEntry.objects.all().filter(book__pk=self.kwargs['book_pk']).order_by(
+            '-borrowed_from')
         return context
 
     def form_valid(self, form):
