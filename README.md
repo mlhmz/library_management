@@ -1,4 +1,4 @@
-# Library Management
+# Library Management 📕
 
 ## Overview 🌻
 The library management is a school assignment and is meant to manage books.
